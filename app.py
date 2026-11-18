@@ -381,6 +381,7 @@ def show_parameter_card(label, value, background="#FFFDF8"):
     )
 
 
+
 # =========================================================
 # 6. HOME PAGE
 # =========================================================
@@ -439,6 +440,7 @@ if menu == "Home":
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 
     st.write("")
     st.subheader("Explore RSA")
