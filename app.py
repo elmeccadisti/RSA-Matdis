@@ -7,9 +7,9 @@ import rsa_core
 # ==========================================
 
 st.set_page_config(
-    page_title="RSA Matdis",
+    page_title="RSA Matematika Diskrit",
     page_icon="🔐",
-    layout="wide",
+    layout="auto",
     initial_sidebar_state="expanded"
 )
 
@@ -110,38 +110,53 @@ if menu == "Home":
 
     st.divider()
 
+    
+    
     st.header("Explore RSA")
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.info(
-            """
-            **Key Generation**
-
+        st.markdown("""
+        <div class="card" style="
+            background-color: #fff7eb;
+            border-color: #f9f0e0;
+        ">
+            <h3 style="color: #287a67;">Key Generation</h3>
+            <p>
             Pelajari proses pembangkitan pasangan
             public key dan private key.
-            """
-        )
-
-        st.success(
-            """
-            **Encryption**
-
-            Pelajari bagaimana plaintext
-            diubah menjadi ciphertext.
-            """
-        )
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.warning(
-            """
-            **Decryption**
+        st.markdown("""
+        <div class="card" style="
+            background-color: #fff7eb;
+            border-color: #f9f0e0;
+        ">
+            <h3 style="color: #287A67;">Encryption</h3>
+            <p>
+            Pelajari bagaimana plaintext
+            diubah menjadi ciphertext.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
+    with col3:
+        st.markdown("""
+        <div class="card" style="
+            background-color: #fff7eb;
+            border-color: #f9f0e0;
+        ">
+            <h3 style="color: #287a67;">Decryption</h3>
+            <p>
             Pelajari bagaimana ciphertext
             dikembalikan menjadi plaintext.
-            """
-        )
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.divider()
 
