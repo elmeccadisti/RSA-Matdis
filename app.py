@@ -18,40 +18,40 @@ st.markdown("""
 
 /* Main background */
 .stApp {
-    background-color: #F8FAFD;
-    color: #243B68;
+    background-color: #fff7eb;
+    color: #cc3a63;
 }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background-color: #EDF2FA;
+    background-color: #f9f0e0;
 }
 
 /* Main text */
 h1, h2, h3, p, label {
-    color: #243B68;
+    color: #cc3a63;
 }
 
 /* Input fields */
 .stTextInput input,
 .stNumberInput input,
 .stTextArea textarea {
-    background-color: #FFFFFF;
-    color: #243B68;
-    border: 1px solid #D5DEED;
+    background-color: #fff7eb;
+    color: #cc3a63;
+    border: 1px solid #f9f0e0;
     border-radius: 8px;
 }
 
 /* Buttons */
 .stButton button {
-    background-color: #315DA8;
+    background-color: #cc3a63;
     color: white;
     border-radius: 8px;
     border: none;
 }
 
 .stButton button:hover {
-    background-color: #24477F;
+    background-color: #cc3a63;
     color: white;
 }
 
@@ -60,7 +60,7 @@ h1, h2, h3, p, label {
     background-color: #FFFFFF;
     padding: 15px;
     border-radius: 12px;
-    border: 1px solid #E0E7F1;
+    border: 1px solid #f9f0e0;
 }
 
 </style>
