@@ -1,3 +1,5 @@
+import textwrap
+
 import streamlit as st
 import rsa_core
 
@@ -268,6 +270,22 @@ hr {
 """, unsafe_allow_html=True)
 
 
+def html(kode):
+    """
+    Render blok HTML lewat st.markdown tanpa terbaca sebagai blok kode.
+
+    Markdown menganggap baris yang menjorok >= 4 spasi sebagai kode, dan
+    baris kosong memutus blok HTML. Jadi indentasi dibuang dan baris kosong
+    dihapus sebelum dirender.
+    """
+    bersih = "\n".join(
+        baris.strip()
+        for baris in textwrap.dedent(kode).splitlines()
+        if baris.strip()
+    )
+    st.markdown(bersih, unsafe_allow_html=True)
+
+
 # =========================================================
 # 3. SESSION STATE
 # =========================================================
@@ -308,37 +326,38 @@ def regenerate_primes():
 # 4. SIDEBAR / NAVIGATION
 # =========================================================
 
-st.sidebar.markdown("""
-<div style="
-    border-bottom: 1px solid #55594D;
-    padding: 12px 5px 20px 5px;
-">
+with st.sidebar:
+    html("""
     <div style="
-        font-family: 'DM Mono', monospace;
-        font-size: 10px;
-        letter-spacing: 1.5px;
-        color: #505747;
+        border-bottom: 1px solid #55594D;
+        padding: 12px 5px 20px 5px;
     ">
-        DISCRETE MATHEMATICS
+        <div style="
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: #505747;
+        ">
+            DISCRETE MATHEMATICS
+        </div>
+        <div style="
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #303529;
+            margin-top: 7px;
+        ">
+            RSA LAB 🔐
+        </div>
+        <div style="
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            color: #505747;
+        ">
+            Interactive Cryptography
+        </div>
     </div>
-    <div style="
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 27px;
-        font-weight: 700;
-        color: #303529;
-        margin-top: 7px;
-    ">
-        RSA LAB 🔐
-    </div>
-    <div style="
-        font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
-        color: #505747;
-    ">
-        Interactive Cryptography
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    """)
 
 st.sidebar.write("")
 st.sidebar.caption("NAVIGATION")
@@ -351,17 +370,18 @@ menu = st.sidebar.radio(
 
 st.sidebar.divider()
 
-st.sidebar.markdown("""
-<div style="
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    line-height: 1.8;
-    color: #505747;
-">
-    RSA MATDIS PROJECT<br>
-    LEARN • ENCRYPT • DECRYPT
-</div>
-""", unsafe_allow_html=True)
+with st.sidebar:
+    html("""
+    <div style="
+        font-family: 'DM Mono', monospace;
+        font-size: 10px;
+        line-height: 1.8;
+        color: #505747;
+    ">
+        RSA MATDIS PROJECT<br>
+        LEARN • ENCRYPT • DECRYPT
+    </div>
+    """)
 
 
 # =========================================================
@@ -370,39 +390,31 @@ st.sidebar.markdown("""
 
 def show_parameter_card(label, value, background="#FFFDF8"):
     """Display a parameter in a high-contrast editorial card."""
-    st.markdown(
-        f"""
-        <div class="parameter-card" style="background:{background};">
-            <div class="parameter-label">{label}</div>
-            <div class="parameter-value">{value}</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-
+    html(f"""
+    <div class="parameter-card" style="background:{background};">
+        <div class="parameter-label">{label}</div>
+        <div class="parameter-value">{value}</div>
+    </div>
+    """)
 
 
 # =========================================================
 # 6. HOME PAGE
 # =========================================================
 
-
 if menu == "Home":
 
-    st.markdown("""
+    html("""
     <div style="
         border: 1px solid #303529;
         background: #FFFDF8;
-        padding: 42px;
-        position: relative;
+        padding: 38px;
     ">
         <p style="
             color: #505747;
             font-family: 'DM Mono', monospace;
             font-size: 11px;
             letter-spacing: 2px;
-            margin-bottom: 22px;
         ">
             DISCRETE MATHEMATICS / RSA PROJECT
         </p>
@@ -423,7 +435,6 @@ if menu == "Home":
             font-size: 15px;
             max-width: 620px;
             line-height: 1.7;
-            margin-top: 18px;
         ">
             Discover the mathematics behind secure communication
             through interactive learning, key generation,
@@ -444,7 +455,7 @@ if menu == "Home":
             LEARN • ENCRYPT • DECRYPT
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
 
     st.write("")
     st.subheader("Explore RSA")
@@ -453,7 +464,7 @@ if menu == "Home":
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("""
+        html("""
         <div class="editorial-card" style="background:#8BB8CC;">
             <h3>01. Key Generation 🔑</h3>
             <p>
@@ -461,10 +472,10 @@ if menu == "Home":
                 and Euler's totient function.
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
     with col2:
-        st.markdown("""
+        html("""
         <div class="editorial-card" style="background:#F5E76A;">
             <h3>02. Encryption 🔒</h3>
             <p>
@@ -472,10 +483,10 @@ if menu == "Home":
                 the RSA public key.
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
     with col3:
-        st.markdown("""
+        html("""
         <div class="editorial-card" style="background:#77C982;">
             <h3>03. Decryption 🔓</h3>
             <p>
@@ -483,7 +494,7 @@ if menu == "Home":
                 the RSA private key.
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
     st.write("")
     st.divider()
@@ -493,7 +504,7 @@ if menu == "Home":
     col1, col2 = st.columns([1.2, 1])
 
     with col1:
-        st.markdown("""
+        html("""
         <div class="editorial-card">
             <h3>How does RSA work?</h3>
             <p>
@@ -506,10 +517,10 @@ if menu == "Home":
                 Euler's totient function, and modular arithmetic.
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
     with col2:
-        st.markdown("""
+        html("""
         <div class="editorial-card" style="background:#F5E76A;">
             <h3>RSA Formula</h3>
             <p style="
@@ -531,99 +542,7 @@ if menu == "Home":
                 uses the private key.
             </p>
         </div>
-        """, unsafe_allow_html=True)
-
-    st.write("")
-    st.caption("RSA MATDIS | INTERACTIVE CRYPTOGRAPHY LEARNING PLATFORM")
-
-
-
-    st.write("")
-    st.subheader("Explore RSA")
-    st.caption("THREE STEPS TO UNDERSTAND RSA")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.markdown("""
-        <div class="editorial-card" style="background:#8BB8CC;">
-            <h3>01. Key Generation 🔑</h3>
-            <p>
-                Generate public and private keys using prime numbers
-                and Euler's totient function.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col2:
-        st.markdown("""
-        <div class="editorial-card" style="background:#F5E76A;">
-            <h3>02. Encryption 🔒</h3>
-            <p>
-                Transform plaintext into ciphertext using
-                the RSA public key.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown("""
-        <div class="editorial-card" style="background:#77C982;">
-            <h3>03. Decryption 🔓</h3>
-            <p>
-                Recover the original message using
-                the RSA private key.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.write("")
-    st.divider()
-
-    st.subheader("The Mathematics Behind RSA")
-
-    col1, col2 = st.columns([1.2, 1])
-
-    with col1:
-        st.markdown("""
-        <div class="editorial-card">
-            <h3>How does RSA work?</h3>
-            <p>
-                RSA is an asymmetric cryptographic algorithm that
-                uses two different keys: a public key for encryption
-                and a private key for decryption.
-            </p>
-            <p>
-                Its mathematical foundation includes prime numbers,
-                Euler's totient function, and modular arithmetic.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col2:
-        st.markdown("""
-        <div class="editorial-card" style="background:#F5E76A;">
-            <h3>RSA Formula</h3>
-            <p style="
-                font-family:'DM Mono', monospace;
-                font-size:19px;
-                font-weight:600;
-            ">
-                C = M<sup>e</sup> mod n
-            </p>
-            <p style="
-                font-family:'DM Mono', monospace;
-                font-size:19px;
-                font-weight:600;
-            ">
-                M = C<sup>d</sup> mod n
-            </p>
-            <p>
-                Encryption uses the public key, while decryption
-                uses the private key.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+        """)
 
     st.write("")
     st.caption("RSA MATDIS | INTERACTIVE CRYPTOGRAPHY LEARNING PLATFORM")
@@ -806,7 +725,7 @@ elif menu == "Key Generation":
             col1, col2 = st.columns(2)
 
             with col1:
-                st.markdown("""
+                html("""
                 <div style="
                     background:#77C982;
                     border:1px solid #303529;
@@ -825,7 +744,7 @@ elif menu == "Key Generation":
                         Used for encryption
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
 
                 st.code(
                     f"n = {keys['n']}\ne = {keys['e']}",
@@ -834,7 +753,7 @@ elif menu == "Key Generation":
                 )
 
             with col2:
-                st.markdown("""
+                html("""
                 <div style="
                     background:#F5E76A;
                     border:1px solid #303529;
@@ -853,7 +772,7 @@ elif menu == "Key Generation":
                         Used for decryption
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
 
                 st.code(
                     f"n = {keys['n']}\nd = {keys['d']}",
@@ -947,7 +866,7 @@ elif menu == "Encryption":
             col1, col2 = st.columns(2)
 
             with col1:
-                st.markdown("""
+                html("""
                 <div style="
                     background:#F5E76A;
                     border:1px solid #303529;
@@ -956,7 +875,7 @@ elif menu == "Encryption":
                 ">
                     <strong style="color:#303529;">PLAINTEXT</strong>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
 
                 st.code(
                     st.session_state.pesan,
@@ -965,7 +884,7 @@ elif menu == "Encryption":
                 )
 
             with col2:
-                st.markdown("""
+                html("""
                 <div style="
                     background:#8BB8CC;
                     border:1px solid #303529;
@@ -974,7 +893,7 @@ elif menu == "Encryption":
                 ">
                     <strong style="color:#26384A;">CIPHERTEXT</strong>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
 
                 st.code(
                     str(st.session_state.ciphertext),
@@ -1075,7 +994,7 @@ elif menu == "Decryption":
             st.divider()
             st.subheader("02 — Decryption Result")
 
-            st.markdown("""
+            html("""
             <div style="
                 background:#77C982;
                 border:1px solid #303529;
@@ -1086,7 +1005,7 @@ elif menu == "Decryption":
                     DECRYPTED MESSAGE
                 </strong>
             </div>
-            """, unsafe_allow_html=True)
+            """)
 
             st.code(
                 st.session_state.hasil_dekripsi,
@@ -1105,44 +1024,27 @@ elif menu == "Decryption":
                     "VERIFICATION SUCCESSFUL — "
                     "Pesan hasil dekripsi sama dengan pesan asli."
                 )
-
-                col1, col2 = st.columns(2)
-
-                with col1:
-                    st.markdown("**Original Message**")
-                    st.code(
-                        st.session_state.pesan,
-                        language=None
-                    )
-
-                with col2:
-                    st.markdown("**Decrypted Message**")
-                    st.code(
-                        st.session_state.hasil_dekripsi,
-                        language=None
-                    )
-
             else:
                 st.error(
                     "VERIFICATION FAILED — "
                     "Pesan hasil dekripsi berbeda dengan pesan asli."
                 )
 
-                col1, col2 = st.columns(2)
+            col1, col2 = st.columns(2)
 
-                with col1:
-                    st.markdown("**Original Message**")
-                    st.code(
-                        st.session_state.pesan,
-                        language=None
-                    )
+            with col1:
+                st.markdown("**Original Message**")
+                st.code(
+                    st.session_state.pesan,
+                    language=None
+                )
 
-                with col2:
-                    st.markdown("**Decrypted Message**")
-                    st.code(
-                        st.session_state.hasil_dekripsi,
-                        language=None
-                    )
+            with col2:
+                st.markdown("**Decrypted Message**")
+                st.code(
+                    st.session_state.hasil_dekripsi,
+                    language=None
+                )
 
 
 # =========================================================
