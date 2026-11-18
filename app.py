@@ -24,7 +24,6 @@ menu = st.sidebar.radio(
     "NAVIGATION",
     [
         "Home",
-        "RSA Theory",
         "Key Generation",
         "Encryption",
         "Decryption"
@@ -118,36 +117,7 @@ if menu == "Home":
         st.write("Mengembalikan pesan menggunakan private key.")
 
 # ==========================================
-# 4. HALAMAN RSA THEORY
-# ==========================================
-
-elif menu == "RSA Theory":
-
-    st.title("RSA Theory")
-
-    st.write(
-        """
-        RSA merupakan algoritma kriptografi asimetris
-        yang menggunakan dua jenis kunci, yaitu public key
-        dan private key.
-        """
-    )
-
-    st.subheader("Basic Concepts")
-
-    st.markdown(
-        """
-        - **Plaintext:** Pesan asli sebelum dienkripsi.
-        - **Ciphertext:** Pesan yang telah dienkripsi.
-        - **Public Key:** Kunci yang digunakan untuk enkripsi.
-        - **Private Key:** Kunci yang digunakan untuk dekripsi.
-        """
-    )
-
-    st.info("Materi teori RSA akan dikembangkan pada tahap berikutnya.")
-
-# ==========================================
-# 5. HALAMAN KEY GENERATION
+# 4. HALAMAN KEY GENERATION
 # ==========================================
 
 elif menu == "Key Generation":
@@ -161,7 +131,7 @@ elif menu == "Key Generation":
     st.info("Fitur pembangkitan kunci akan ditambahkan berikutnya.")
 
 # ==========================================
-# 6. HALAMAN ENCRYPTION
+# 5. HALAMAN ENCRYPTION
 # ==========================================
 
 elif menu == "Encryption":
@@ -175,7 +145,7 @@ elif menu == "Encryption":
     st.info("Fitur enkripsi akan ditambahkan berikutnya.")
 
 # ==========================================
-# 7. HALAMAN DECRYPTION
+# 6. HALAMAN DECRYPTION
 # ==========================================
 
 elif menu == "Decryption":
@@ -189,7 +159,7 @@ elif menu == "Decryption":
     st.info("Fitur dekripsi akan ditambahkan berikutnya.")
 
 # ==========================================
-# 8. FOOTER
+# 7. FOOTER
 # ==========================================
 
 st.divider()
