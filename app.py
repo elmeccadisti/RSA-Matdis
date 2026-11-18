@@ -387,19 +387,22 @@ def show_parameter_card(label, value, background="#FFFDF8"):
 # 6. HOME PAGE
 # =========================================================
 
+
 if menu == "Home":
 
     st.markdown("""
     <div style="
         border: 1px solid #303529;
         background: #FFFDF8;
-        padding: 38px;
+        padding: 42px;
+        position: relative;
     ">
         <p style="
             color: #505747;
             font-family: 'DM Mono', monospace;
             font-size: 11px;
             letter-spacing: 2px;
+            margin-bottom: 22px;
         ">
             DISCRETE MATHEMATICS / RSA PROJECT
         </p>
@@ -420,6 +423,7 @@ if menu == "Home":
             font-size: 15px;
             max-width: 620px;
             line-height: 1.7;
+            margin-top: 18px;
         ">
             Discover the mathematics behind secure communication
             through interactive learning, key generation,
@@ -441,6 +445,97 @@ if menu == "Home":
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    st.write("")
+    st.subheader("Explore RSA")
+    st.caption("THREE STEPS TO UNDERSTAND RSA")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div class="editorial-card" style="background:#8BB8CC;">
+            <h3>01. Key Generation 🔑</h3>
+            <p>
+                Generate public and private keys using prime numbers
+                and Euler's totient function.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="editorial-card" style="background:#F5E76A;">
+            <h3>02. Encryption 🔒</h3>
+            <p>
+                Transform plaintext into ciphertext using
+                the RSA public key.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class="editorial-card" style="background:#77C982;">
+            <h3>03. Decryption 🔓</h3>
+            <p>
+                Recover the original message using
+                the RSA private key.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+    st.divider()
+
+    st.subheader("The Mathematics Behind RSA")
+
+    col1, col2 = st.columns([1.2, 1])
+
+    with col1:
+        st.markdown("""
+        <div class="editorial-card">
+            <h3>How does RSA work?</h3>
+            <p>
+                RSA is an asymmetric cryptographic algorithm that
+                uses two different keys: a public key for encryption
+                and a private key for decryption.
+            </p>
+            <p>
+                Its mathematical foundation includes prime numbers,
+                Euler's totient function, and modular arithmetic.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="editorial-card" style="background:#F5E76A;">
+            <h3>RSA Formula</h3>
+            <p style="
+                font-family:'DM Mono', monospace;
+                font-size:19px;
+                font-weight:600;
+            ">
+                C = M<sup>e</sup> mod n
+            </p>
+            <p style="
+                font-family:'DM Mono', monospace;
+                font-size:19px;
+                font-weight:600;
+            ">
+                M = C<sup>d</sup> mod n
+            </p>
+            <p>
+                Encryption uses the public key, while decryption
+                uses the private key.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+    st.caption("RSA MATDIS | INTERACTIVE CRYPTOGRAPHY LEARNING PLATFORM")
+
 
 
     st.write("")
