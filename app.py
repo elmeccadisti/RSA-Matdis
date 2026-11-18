@@ -347,7 +347,7 @@ with st.sidebar:
             color: #303529;
             margin-top: 7px;
         ">
-            RSA LAB 🔐
+            RSA 🔐
         </div>
         <div style="
             font-family: 'DM Sans', sans-serif;
@@ -426,7 +426,7 @@ if menu == "Home":
             line-height: 1.12;
             margin: 12px 0;
         ">
-            RSA Cryptography.
+            RSA Cryptography
         </h1>
 
         <p style="
