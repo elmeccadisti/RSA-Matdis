@@ -1,6 +1,6 @@
 
 import streamlit as st
-import rsa_core
+#import rsa_core
 
 # ==========================================
 # 1. KONFIGURASI HALAMAN
