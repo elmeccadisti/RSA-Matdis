@@ -1,6 +1,6 @@
 
 import streamlit as st
-#import rsa_core
+import rsa_core
 
 # ==========================================
 # 1. KONFIGURASI HALAMAN
@@ -9,8 +9,8 @@ import streamlit as st
 st.set_page_config(
     page_title="RSA Matematika Diskrit",
     page_icon="🔐",
-    layout="auto",
-    initial_sidebar_state="expanded"
+    layout="wide",
+    initial_sidebar_state="auto"
 )
 
 st.markdown("""
