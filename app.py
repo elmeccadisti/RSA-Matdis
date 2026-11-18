@@ -71,7 +71,7 @@ h1, h2, h3, p, label {
 
 defaults = {
     "primes": None,        # hasil rsa_core.generate_primes (p, q, n, phi)
-    "keys": None,          # hasil rsa_core.compute_keys (lengkap dengan e, d)
+    "rsa_keys": None,          # hasil rsa_core.compute_keys (lengkap dengan e, d)
     "e_input": "65537",    # isi kolom input e
     "pesan": "",           # plaintext asli
     "ciphertext": [],      # hasil enkripsi
@@ -213,7 +213,7 @@ elif menu == "Key Generation":
             st.session_state.p_bits, st.session_state.q_bits
         )
         # p, q baru -> kunci dan hasil lama tidak berlaku lagi
-        st.session_state.keys = None
+        st.session_state.rsa_keys = None
         st.session_state.ciphertext = []
         st.session_state.hasil_dekripsi = None
 
@@ -281,17 +281,17 @@ elif menu == "Key Generation":
         if hitung:
             try:
                 e_val = int(st.session_state.e_input.strip())
-                st.session_state.keys = rsa_core.compute_keys(primes, e_val)
+                st.session_state.rsa_keys = rsa_core.compute_keys(primes, e_val)
                 st.session_state.ciphertext = []
                 st.session_state.hasil_dekripsi = None
             except ValueError as err:
-                st.session_state.keys = None
+                st.session_state.rsa_keys = None
                 if "invalid literal" in str(err):
                     st.error("e harus berupa bilangan bulat.")
                 else:
                     st.error(str(err))
 
-    keys = st.session_state.keys
+    keys = st.session_state.rsa_keys
 
     if primes and keys:
         st.info("Step 4: e valid (gcd(e, φ(n)) = 1).")
@@ -329,7 +329,7 @@ elif menu == "Encryption":
         "Masukkan pesan yang ingin dienkripsi menggunakan public key."
     )
 
-    keys = st.session_state.keys
+    keys = st.session_state.rsa_keys
 
     if not keys:
         st.warning(
@@ -404,7 +404,7 @@ elif menu == "Decryption":
         "otomatis untuk proses dekripsi."
     )
 
-    keys = st.session_state.keys
+    keys = st.session_state.rsa_keys
 
     if not keys:
         st.warning(
