@@ -1,6 +1,4 @@
 # KEY GENERATION
-
-!pip install pycryptodome
 from Crypto.Util.number import getPrime
 from math import gcd
 import secrets
