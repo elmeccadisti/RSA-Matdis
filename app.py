@@ -426,7 +426,6 @@ if menu == "Home":
             line-height: 1.12;
             margin: 12px 0;
         ">
-            Explore the world of<br>
             RSA Cryptography.
         </h1>
 
