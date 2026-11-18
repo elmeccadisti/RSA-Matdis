@@ -345,7 +345,7 @@ elif menu == "Encryption":
         pesan = st.text_area(
             "Plaintext Message",
             value=st.session_state.pesan
-            or "Halo, ini adalah pesan rahasia dari Matematika Diskrit!",
+            or "Halo, ini Mecca, Dara, Michelle!",
             height=120
         )
 
