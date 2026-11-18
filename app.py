@@ -89,15 +89,6 @@ if menu == "Home":
             """
         )
 
-        st.info(
-            """
-            **RSA Theory**
-
-            Pelajari konsep matematika
-            yang mendasari algoritma RSA.
-            """
-        )
-
     st.divider()
 
     st.header("How RSA Works")
