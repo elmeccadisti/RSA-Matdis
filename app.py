@@ -9,8 +9,62 @@ import rsa_core
 st.set_page_config(
     page_title="RSA Matdis",
     page_icon="🔐",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
+
+st.markdown("""
+<style>
+
+/* Main background */
+.stApp {
+    background-color: #F8FAFD;
+    color: #243B68;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #EDF2FA;
+}
+
+/* Main text */
+h1, h2, h3, p, label {
+    color: #243B68;
+}
+
+/* Input fields */
+.stTextInput input,
+.stNumberInput input,
+.stTextArea textarea {
+    background-color: #FFFFFF;
+    color: #243B68;
+    border: 1px solid #D5DEED;
+    border-radius: 8px;
+}
+
+/* Buttons */
+.stButton button {
+    background-color: #315DA8;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+.stButton button:hover {
+    background-color: #24477F;
+    color: white;
+}
+
+/* Cards */
+[data-testid="stMetric"] {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #E0E7F1;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # ==========================================
 # 2. SIDEBAR / NAVIGASI
