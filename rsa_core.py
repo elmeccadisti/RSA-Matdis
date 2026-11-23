@@ -1,6 +1,7 @@
 
 from math import gcd
 import secrets
+import hashlib
 
 from Crypto.Util.number import getPrime
 
@@ -110,7 +111,7 @@ def dekripsi(ciphertext, private_key):
     """
     Mendekripsi list ciphertext menjadi string.
     Raise ValueError jika hasil dekripsi bukan ASCII valid.
-    """
+    """  
     n, d = private_key
 
     hasil = [pow(c, d, n) for c in ciphertext]
@@ -122,3 +123,30 @@ def dekripsi(ciphertext, private_key):
             "Dekripsi gagal: hasil bukan teks ASCII yang valid. "
             "Pastikan private key sesuai dengan public key yang dipakai."
         )
+
+# ==================
+# Digital Signature
+# ==================
+
+def digital_signature(pesan, private_key):
+    n, d = private_key
+    hash_pesan = hashlib.sha256(pesan.encode("utf-8")).hexdigest()
+    hash_integer = int(hash_pesan, 16)
+    hash_mod = hash_integer % n
+    signature = pow(hash_mod, d, n)
+    return {
+        "hash": hash_pesan,
+        "signature": signature
+    }
+
+def verifikasi_signature(pesan, signature, public_key):
+    n, e = public_key
+    hash_pesan = hashlib.sha256(pesan.encode("utf-8")).hexdigest()
+    hash_integer = int(hash_pesan, 16)
+    hash_mod = hash_integer % n
+    if not isinstance(signature, int):
+        return False
+    if signature < 0 or signature >= n:
+        return False
+    hash_verifikasi = pow(signature, e, n)
+    return hash_verifikasi == hash_mod
