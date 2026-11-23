@@ -1052,19 +1052,7 @@ elif menu == "Decryption":
 
 st.divider()
 
-col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.caption(
-        "RSA MATDIS | INTERACTIVE CRYPTOGRAPHY LEARNING PLATFORM"
-    )
-
-with col2:
     st.caption("LEARN • ENCRYPT • DECRYPT")
 
-st.caption(
-    "Catatan: implementasi RSA ini digunakan untuk pembelajaran. "
-    "RSA dalam penggunaan nyata memerlukan padding yang aman "
-    "(misalnya OAEP) dan umumnya digunakan untuk mengenkripsi "
-    "kunci simetris, bukan pesan per karakter seperti simulasi ini."
-)
