@@ -1046,7 +1046,5 @@ elif menu == "Decryption":
 
 st.divider()
 
-
-with col1:
-    st.caption("LEARN • ENCRYPT • DECRYPT")
+st.caption("LEARN • ENCRYPT • DECRYPT")
 
