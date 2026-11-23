@@ -1,6 +1,3 @@
-"""
-Modul inti RSA (hanya fungsi, tanpa input/print) agar bisa di-import app.py.
-"""
 
 from math import gcd
 import secrets
