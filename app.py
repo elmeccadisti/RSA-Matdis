@@ -299,6 +299,10 @@ defaults = {
     "hasil_dekripsi": None,
     "p_bits": 448,
     "q_bits": 448,
+
+    # DIGITAL SIGNATURE
+    "signature_result": None,
+    "signature_message": ""
 }
 
 for key, value in defaults.items():
@@ -364,7 +368,13 @@ st.sidebar.caption("NAVIGATION")
 
 menu = st.sidebar.radio(
     "Menu",
-    ["Home", "Key Generation", "Encryption", "Decryption"],
+    [
+        "Home",
+        "Key Generation",
+        "Encryption",
+        "Decryption",
+        "Digital Signature"
+    ],
     label_visibility="collapsed"
 )
 
@@ -1041,10 +1051,216 @@ elif menu == "Decryption":
 
 
 # =========================================================
-# 10. FOOTER
+# 10. DIGITAL SIGNATURE PAGE
+# =========================================================
+
+elif menu == "Digital Signature":
+
+    st.title("Digital Signature ✍️")
+
+    st.write(
+        "Buat tanda tangan digital dari pesan menggunakan private key "
+        "dan verifikasi keasliannya menggunakan public key."
+    )
+
+    keys = st.session_state.rsa_keys
+
+    # ---------------------------------------------
+    # CHECK RSA KEY
+    # ---------------------------------------------
+
+    if not keys:
+
+        st.warning(
+            "Belum ada RSA key pair. "
+            "Silakan generate keys terlebih dahulu "
+            "melalui menu Key Generation."
+        )
+
+    else:
+
+        st.success("RSA key pair tersedia.")
+
+        st.divider()
+
+        # -----------------------------------------
+        # 01. INPUT MESSAGE
+        # -----------------------------------------
+
+        st.subheader("01 — Message Input")
+
+        pesan_signature = st.text_area(
+            "Masukkan pesan yang ingin ditandatangani",
+            placeholder="Tuliskan pesan di sini...",
+            height=150,
+            key="signature_message"
+        )
+
+        st.caption(
+            "Pesan ini akan digunakan untuk membuat digital signature."
+        )
+
+        # -----------------------------------------
+        # 02. GENERATE SIGNATURE
+        # -----------------------------------------
+
+        st.divider()
+
+        st.subheader("02 — Generate Digital Signature")
+
+        if st.button(
+            "Generate Signature",
+            type="primary",
+            use_container_width=True
+        ):
+
+            if not pesan_signature.strip():
+
+                st.warning("Pesan tidak boleh kosong.")
+
+                st.session_state.signature_result = None
+
+            else:
+
+                try:
+
+                    hasil_signature = rsa_core.buat_signature(
+                        pesan_signature,
+                        keys["private_key"]
+                    )
+
+                    st.session_state.signature_result = hasil_signature
+
+                    st.success(
+                        "Digital signature berhasil dibuat!"
+                    )
+
+                except Exception as err:
+
+                    st.error(f"Terjadi kesalahan: {err}")
+
+        # -----------------------------------------
+        # 03. DISPLAY SIGNATURE RESULT
+        # -----------------------------------------
+
+        if st.session_state.signature_result is not None:
+
+            hasil = st.session_state.signature_result
+
+            st.divider()
+
+            st.subheader("03 — Signature Result")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                st.markdown("**Original Message**")
+
+                st.code(
+                    pesan_signature,
+                    language=None,
+                    wrap_lines=True
+                )
+
+            with col2:
+
+                st.markdown("**SHA-256 Hash**")
+
+                st.code(
+                    hasil["hash"],
+                    language=None,
+                    wrap_lines=True
+                )
+
+            st.markdown("**Digital Signature**")
+
+            st.code(
+                str(hasil["signature"]),
+                language=None,
+                wrap_lines=True
+            )
+
+            st.caption(
+                "Signature dihasilkan menggunakan private key RSA."
+            )
+
+            # -------------------------------------
+            # 04. VERIFICATION
+            # -------------------------------------
+
+            st.divider()
+
+            st.subheader("04 — Verify Digital Signature")
+
+            pesan_verifikasi = st.text_area(
+                "Pesan yang akan diverifikasi",
+                value=pesan_signature,
+                height=120,
+                key="pesan_verifikasi_signature",
+                help=(
+                    "Pesan harus sama dengan pesan yang "
+                    "digunakan saat membuat signature."
+                )
+            )
+
+            signature_input = st.text_input(
+                "Masukkan Digital Signature",
+                value=str(hasil["signature"]),
+                key="signature_verifikasi_input"
+            )
+
+            st.caption(
+                "Kamu bisa mengubah pesan atau signature "
+                "untuk mencoba proses verifikasi."
+            )
+
+            if st.button(
+                "Verify Signature",
+                use_container_width=True
+            ):
+
+                try:
+
+                    signature_int = int(signature_input.strip())
+
+                    valid = rsa_core.verifikasi_signature(
+                        pesan_verifikasi,
+                        signature_int,
+                        keys["public_key"]
+                    )
+
+                    if valid:
+
+                        st.success(
+                            "SIGNATURE VALID — "
+                            "Pesan dan signature berhasil diverifikasi."
+                        )
+
+                    else:
+
+                        st.error(
+                            "SIGNATURE INVALID — "
+                            "Pesan atau signature tidak cocok."
+                        )
+
+                except ValueError:
+
+                    st.error(
+                        "Signature harus berupa bilangan bulat."
+                    )
+
+                except Exception as err:
+
+                    st.error(
+                        f"Terjadi kesalahan saat verifikasi: {err}"
+                    )
+
+# =========================================================
+# 11. FOOTER
 # =========================================================
 
 st.divider()
 
-st.caption("LEARN • ENCRYPT • DECRYPT")
+st.caption("LEARN • ENCRYPT • DECRYPT • SIGN")
 
