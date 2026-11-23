@@ -1124,10 +1124,10 @@ elif menu == "Digital Signature":
 
                 try:
 
-                    hasil_signature = rsa_core.buat_signature(
-                        pesan_signature,
-                        keys["private_key"]
-                    )
+                    hasil_signature = rsa_core.digital_signature(
+    pesan_signature,
+    keys["private_key"]
+)
 
                     st.session_state.signature_result = hasil_signature
 
