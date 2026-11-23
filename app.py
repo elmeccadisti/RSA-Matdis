@@ -634,12 +634,6 @@ elif menu == "Key Generation":
                 "#F5E76A"
             )
 
-        with st.expander("View p and q details", expanded=False):
-            st.write("**p**")
-            st.code(str(primes["p"]), language=None, wrap_lines=True)
-            st.write("**q**")
-            st.code(str(primes["q"]), language=None, wrap_lines=True)
-
         # ----- STEP 2: Calculate n and phi -----
 
         st.divider()
